@@ -1,0 +1,68 @@
+<style>
+    #content2 {
+        display: none;
+    }
+</style>
+<script>
+    function ShowMoreContent(button){
+
+        const ellipse = button.parentElement.querySelector("#ellipse");
+        const content2 = button.parentElement.querySelector("#content2");
+
+        if (ellipse.style.display === "none") {
+            ellipse.style.display = "inline";
+            content2.style.display = "none";
+
+            button.textContent = "Read more";
+        } else {
+            ellipse.style.display = "none";
+            content2.style.display = "inline";
+
+            button.textContent = "Read less";
+        }
+    }
+</script>
+
+<div class="d-flex align-items-start" style="height: 200px;">
+  <div class="h-200 d-inline-block" style="width: 15%;">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/news/DisplayTop4Articles">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/news/ShowCategory">News</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/admin_controls/adminhome">Admin</a>
+      </li>
+      <li class="nav-item">
+        <form class="d-flex" action = "/news/ShowSearchResult" method = "get">
+          <input class="form-control me-2" id ="keyword" name="keyword" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </li>
+    </ul>
+  </div>
+  <div class="h-200 d-inline-block" style="width: 50%; padding-left: 5%;">
+    <% @category.each do |cat| %>
+      <h5><mark>Category: <%=cat.name %></mark></h5>
+      <%@news.each do |news| %>
+        <%if cat.id == news.category_id %>
+          <div class="display">
+            <p><%= link_to news.title,{:action =>'ShowArticle', :id => news.id} %></p>
+            <%news.content %>
+            <%x1 = news.content.slice(0..15) %>
+            <%x2 = news.content.slice(16..news.content.length) %>
+            <p><%=x1 %><span id = "ellipse">...</span><span id = "content2"><%=x2 %></span></p>
+            <button id="readmore" onclick = "ShowMoreContent(this)">Read more</button>
+            <br>
+            <br>
+          </div>
+        <%else%>
+        <%end %>
+      <%end %>
+    <%end %>
+  </div>
+</div>
+
+

@@ -1,0 +1,68 @@
+<style>
+    #content2 {
+        display: none;
+    }
+</style>
+<script>
+    function ShowMoreContent(button){
+
+        const ellipse = button.parentElement.querySelector("#ellipse");
+        const content2 = button.parentElement.querySelector("#content2");
+
+        if (ellipse.style.display === "none") {
+            ellipse.style.display = "inline";
+            content2.style.display = "none";
+
+            button.textContent = "Read more";
+        } else {
+            ellipse.style.display = "none";
+            content2.style.display = "inline";
+
+            button.textContent = "Read less";
+        }
+    }
+</script>
+
+<div class="btn-group-vertical" style="float: right; position: relative">
+  <a class="btn btn-primary" href="/admin_controls/new" role="button">Create News</a>
+  <a class="btn btn-primary" href="/admin_controls/new_category" role="button">Create News Category</a>
+  <a class="btn btn-primary" href="/admin_controls/list_category" role="button">Modify Categories</a>
+  <a class="btn btn-primary" href="/news/DisplayTop4Articles" role="button">Logout</a>
+</div>
+<h1>Admin</h1>
+<table>
+  <thead>
+  <tr>
+    <th><h1>News List</h1></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @news.each do |x| %>
+    <tr>
+      <td><%=x.title %>
+        <%=link_to "Edit",{:action =>'edit', :id => x.id} %> |
+        <%=link_to "Delete",{:action =>'destroy', :id => x.id}, onclick:'return confirm("Are you sure to delete this news? This action cannot be undone.")' %> |
+        <%if x.hide == 1 %>
+          <%=link_to "Hide",{:action =>'visibility', :id => x.id, :hide => x.hide}%>
+          <%else %>
+          <%=link_to "Unhide",{:action =>'visibility', :id => x.id, :hide => x.hide}%>
+        <%end %>
+      </td>
+    </tr>
+    <tr>
+      <td><div class="display">
+        <%x.content %>
+        <%x1 = x.content.slice(0..15) %>
+        <%x2 = x.content.slice(16..x.content.length) %>
+        <p><%=x1 %><span id = "ellipse">...</span><span id = "content2"><%=x2 %></span></p>
+        <button id="readmore" onclick = "ShowMoreContent(this)">Read more</button>
+        <br>
+      </div>
+      </td>
+    </tr>
+    <tr>
+      <td>&nbsp</td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

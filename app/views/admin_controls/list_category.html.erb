@@ -1,0 +1,14 @@
+<h1>Modify Categories</h1>
+<table>
+  <tbody>
+  <% @category.each do |x| %>
+    <tr>
+      <td><%=x.name %></td>
+      <td><%=link_to "Edit",{:action =>'edit_category', :id => x.id} %> |
+        <%=link_to "Delete",{:action =>'delete_category', :id => x.id}, onclick:'return confirm("Are you sure to delete this category? This action cannot be undone.")'  %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<br>
+<h5><%=link_to "Go Back",{:action => 'index'} %></h5>

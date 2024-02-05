@@ -1,0 +1,56 @@
+<style>
+    div.login{
+        width: 50%;
+        margin-top:10px;
+    }
+
+    input#un{
+        margin-top:5px;
+        margin-bottom:10px;
+    }
+    input#pass{
+        margin-top:5px;
+        margin-bottom:10px;
+    }
+    div.login.label{
+         width: 25%;
+         margin-top:10px;
+     }
+</style>
+
+<div class="d-flex align-items-start" style="height: 200px;">
+  <div class="h-200 d-inline-block" style="width: 15%;">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/news/DisplayTop4Articles">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/news/ShowCategory">News</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/admin_controls/adminhome">Admin</a>
+      </li>
+      <li class="nav-item">
+        <form class="d-flex" action = "/news/ShowSearchResult" method = "get">
+          <input class="form-control me-2" id ="keyword" name="keyword" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </li>
+    </ul>
+  </div>
+  <div class="h-200 d-inline-block" style="width: 50%; padding-left: 5%;">
+    <div class="login">
+      <form class="container-fluid" action="/admin_controls/adminlogin" method="post">
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="text" class="form-control" id="un" name="un" placeholder="Username" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" id="pass" name="pass" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+      </form>
+    </div>
+  </div>
+</div>

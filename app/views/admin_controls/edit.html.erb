@@ -1,0 +1,10 @@
+<h1>Edit</h1>
+<%= form_for @news, url: {action: :update} do |form| %>
+  <p>Title: <%= form.text_field :title , required: true%></p>
+  <p>Content: <%= form.text_area :content, size: "60x2", required: true%></p>
+  <p>Category: <%= collection_select(:news, :category_id, @category, :id, :name) %></p>
+  <p>Source: <%= form.text_field :source, required: true %></p>
+  <input type="hidden" name="id" value="<%=@news.id %>">
+  <%= form.submit name="Update News" %>
+  <%= form.button name="Cancel", {:action =>'index'} %>
+<% end %>

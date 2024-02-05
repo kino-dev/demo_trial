@@ -1,0 +1,46 @@
+<div class="d-flex align-items-start" style="height: 200px;">
+  <div class="h-200 d-inline-block" style="width: 15%;">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/news/DisplayTop4Articles">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/news/ShowCategory">News</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/admin_controls/adminhome">Admin</a>
+      </li>
+      <li class="nav-item">
+        <form class="d-flex" action = "/news/ShowSearchResult" method = "get">
+          <input class="form-control me-2" id ="keyword" name="keyword" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </li>
+    </ul>
+  </div>
+  <div class="h-200 d-inline-block" style="width: 50%; padding-left: 5%;">
+        <h3>Individual Article</h3>
+        <p><b>Title:</b> <%=@news.title %></p>
+        <p><b>Source:</b> <%=@news.source %></p>
+        <p><b>Content:</b> <%=@news.content %></p>
+        <p><b>Category:</b> <%=@category.name %></p>
+        <%date_only = @news.created_at%>
+        <p><b>Date:</b> <%=date_only.strftime("%d %B %Y")%></p>
+    <br>
+    <h3>Comments</h3>
+    <%@comments.each do |x| %>
+      <%date_time = x.created_at %>
+      <%date_time = date_time+11.hours %>
+      <%date_time_formatted=date_time.strftime("%I:%M%p %d/%m/%Y ") %>
+      <p><%=date_time_formatted%>: <%=x.public_notes %> </p>
+    <% end %>
+
+    <form action="/news/AddComment" method="post">
+      <label for="comment">Comments: </label>
+      <input type="text" id ="comment" name="comment">
+      <input type="hidden" name="id" value="<%=@news.id %>">
+      <input type="submit" value="Publish">
+    </form>
+
+  </div>
+</div>

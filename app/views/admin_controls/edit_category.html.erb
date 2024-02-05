@@ -1,0 +1,7 @@
+<h1>Edit News Category</h1>
+<%= form_for @category, url: {action: :update_category}  do |form| %>
+  <p>Category Name: <%= form.text_field :name , required: true%></p>
+  <input type="hidden" name="id" value="<%=@category.id %>">
+  <%= form.submit %>
+  <%= form.button name="Cancel", {:action =>'list_category'} %>
+<% end %>

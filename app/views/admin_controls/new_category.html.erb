@@ -1,0 +1,7 @@
+<h1>Create News Category</h1>
+<%= form_tag :action => 'create_category' do %>
+  <p>Category Name: <%= text_field 'category', 'name', required: true%></p>
+  <%= submit_tag "Create" %>
+<% end %>
+<br>
+<h5><%=link_to "Go Back",{:action => 'index'} %></h5>

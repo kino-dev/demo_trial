@@ -1,0 +1,10 @@
+<h1>Create News Articles</h1>
+<%= form_tag :action => 'create' do %>
+  <p>Title: <%= text_field 'news', 'title', required: true%></p>
+  <p>Content: <%= text_field 'news', 'content', size: "60x2", required: true %></p>
+  <p>Source: <%= text_field 'news', 'source', required: true %></p>
+  <p>Category: <%= collection_select(:news, :category_id, @category, :id, :name) %></p>
+  <%= submit_tag "Create News" %>
+<% end %>
+<br>
+<h5><%=link_to "Go Back",{:action => 'index'} %></h5>
